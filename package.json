@@ -1,0 +1,20 @@
+{
+  "name": "trip_pixel",
+  "version": "1.0.0",
+  "description": "MERN full stack project",
+  "homepage": "https://github.com/R5207644/TripPixel#readme",
+  "bugs": {
+    "url": "https://github.com/R5207644/TripPixel/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/R5207644/TripPixel.git"
+  },
+  "license": "MIT",
+  "author": "Sarvesh Kumar",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
