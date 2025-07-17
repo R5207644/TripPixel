@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create new listing</title>
+</head>
+
+<body>
+  <h2>Create new listing</h2>
+  <form action="/listings" method="post">
+    <table>
+      <tr>
+        <td>Title</td>
+        <td><input type="text" name="listing[title]" required></td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td><input type="text" name="listing[description]"></td>
+      </tr>
+      <tr>
+        <td>Image url</td>
+        <td><input type="text" name="listing[image]"></td>
+      </tr>
+      <tr>
+        <td>Price</td>
+        <td><input type="number" name="listing[price]"></td>
+      </tr>
+      <tr>
+        <td>Location</td>
+        <td><input type="text" name="listing[location]"></td>
+      </tr>
+      <tr>
+        <td>Country</td>
+        <td><input type="text" name="listing[country]"></td>
+      </tr>
+      <tr>
+        <td><input type="reset" value="reset"></td>
+        <td><input type="submit" value="submit"></td>
+      </tr>
+    </table>
+  </form>
+</body>
+
+</html>

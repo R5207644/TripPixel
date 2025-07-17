@@ -7,6 +7,7 @@ const path = require("path");
 const DB_URL = "mongodb://127.0.0.1:27017/trippixel";
 const PORT = 8080;
 
+//database connection
 async function main() {
   await mongoose.connect(DB_URL);
 }
@@ -25,8 +26,20 @@ app.get("/", (req, res) => {
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 
+//Create route
+app.get("/listings/new", (req, res) =>{
+  res.render("listings/new.ejs");
+});
+
+// Inserting new listing route
+app.post("/listings", async(req, res) => {
+  await new Listing(req.body.listing).save();
+  res.redirect("/listings");
+});
+
+//read route
 app.get("/listings", async (req, res) => {
   let listings = [];
   let allListings = await Listing.find({});
@@ -39,12 +52,15 @@ app.get("/listings", async (req, res) => {
   res.render("listings/index.ejs", { listings });
 });
 
-app.get("/listings/:id", async(req, res) => {
-  let {id} = req.params;
+//show route
+app.get("/listings/:id", async (req, res) => {
+  let { id } = req.params;
   const listing = await Listing.findById(id);
 
-  res.render("listings/show.ejs", {listing});
+  res.render("listings/show.ejs", { listing });
 });
+
+
 
 app.listen(PORT, () => {
   console.log("app is listening on port" + PORT);
