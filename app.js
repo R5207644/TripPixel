@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const Listing = require("./models/listing.js");
 const path = require("path");
+const methodOverride = require("method-override");
 
 const DB_URL = "mongodb://127.0.0.1:27017/trippixel";
 const PORT = 8080;
@@ -27,14 +28,15 @@ app.get("/", (req, res) => {
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 //Create route
-app.get("/listings/new", (req, res) =>{
+app.get("/listings/new", (req, res) => {
   res.render("listings/new.ejs");
 });
 
 // Inserting new listing route
-app.post("/listings", async(req, res) => {
+app.post("/listings", async (req, res) => {
   await new Listing(req.body.listing).save();
   res.redirect("/listings");
 });
@@ -60,6 +62,26 @@ app.get("/listings/:id", async (req, res) => {
   res.render("listings/show.ejs", { listing });
 });
 
+// edit route
+app.get("/listings/:id/edit", async (req, res) => {
+  let { id } = req.params;
+  res.render("listings/edit.ejs", { listing: await Listing.findById(id) });
+});
+
+//update route
+app.put("/listings/:id", async (req, res) => {
+  let {id}  = req.params;;
+  await Listing.findByIdAndUpdate(id, req.body.listing);
+  res.redirect(`/listings/${id}/edit`);
+});
+
+//delete route
+app.delete("/listings/:id", async(req, res) => {
+  let {id } = req.params;
+  let deleted = await Listing.findByIdAndDelete(id);
+  console.log(deleted);
+  res.redirect("/listings");
+});
 
 
 app.listen(PORT, () => {

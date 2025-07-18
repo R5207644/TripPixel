@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>edit listing</title>
+</head>
+
+<body>
+  <h2>edit listing</h2>
+  <form action="/listings/<%= listing._id %>?_method=put" method="post">
+
+    <input type="text" name="listing[title]" required value="<%= listing.title %>"><br><br>
+    <textarea name="listing[description]" required placeholder="Description"><%= listing.description %></textarea><br><br>
+    <input type="text" name="listing[image]" value="<%= listing.image %>"><br><br>
+    <input type="number" name="listing[price]" required value="<%= listing.price %>"><br><br>
+    <input type="text" name="listing[location]" required value="<%= listing.location %>"><br><br>
+    <input type="text" name="listing[country]" required value="<%= listing.country %>"><br><br>
+    
+    <input type="submit" value="submit">
+  </form>
+</body>
+
+</html>
