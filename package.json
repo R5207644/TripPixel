@@ -16,5 +16,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs-mate": "^4.0.0",
+    "express-ejs-layouts": "^2.5.1"
   }
 }

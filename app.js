@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
+const ejsMate = require("ejs-mate");
 
 const DB_URL = "mongodb://127.0.0.1:27017/trippixel";
 const PORT = 8080;
@@ -29,6 +30,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(express.static(path.join(__dirname, "/public")));
+app.engine('ejs', ejsMate);
 
 //Create route
 app.get("/listings/new", (req, res) => {
@@ -43,14 +46,7 @@ app.post("/listings", async (req, res) => {
 
 //read route
 app.get("/listings", async (req, res) => {
-  let listings = [];
-  let allListings = await Listing.find({});
-  for (let { _id, title } of allListings) {
-    let listing = {};
-    listing._id = _id;
-    listing.title = title;
-    listings.push(listing);
-  }
+  let listings = await Listing.find({});
   res.render("listings/index.ejs", { listings });
 });
 
@@ -72,7 +68,7 @@ app.get("/listings/:id/edit", async (req, res) => {
 app.put("/listings/:id", async (req, res) => {
   let {id}  = req.params;;
   await Listing.findByIdAndUpdate(id, req.body.listing);
-  res.redirect(`/listings/${id}/edit`);
+  res.redirect(`/listings/${id}`);
 });
 
 //delete route
