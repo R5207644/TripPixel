@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const initData = require("./data.js");
 const Listing = require("../models/listing.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/trippixel";
+const MONGO_URL = "mongodb+srv://R5207644:GdussKJ7jFf9tWtF@cluster0.rmfssb5.mongodb.net/trippixel";
 
 main()
   .then(() => {

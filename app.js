@@ -6,7 +6,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 
-const DB_URL = "mongodb://127.0.0.1:27017/trippixel";
+const DB_URL = "mongodb+srv://R5207644:GdussKJ7jFf9tWtF@cluster0.rmfssb5.mongodb.net/trippixel";
 const PORT = 8080;
 
 //database connection
